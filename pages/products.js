@@ -5,17 +5,17 @@ import ProductsFilter from '../components/products-filter';
 import ProductsContent from '../components/products-content';
 
 const Products = () => (
-  <Layout>
-    <Breadcrumb />
-    <section className="products-page">
-      <div className="container">
-        <ProductsFilter />
-        <ProductsContent />
-      </div>
-    </section>
-    <Footer />
-  </Layout>
-)
+	<Layout metadata={{ title: "Next e-commerce website" }}>
+		<Breadcrumb />
+		<section className="products-page">
+			<div className="container">
+				<ProductsFilter />
+				<ProductsContent />
+			</div>
+		</section>
+		<Footer />
+	</Layout>
+);
   
 export default Products
   

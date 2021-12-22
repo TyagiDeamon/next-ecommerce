@@ -6,7 +6,7 @@ import Subscribe from '../components/subscribe';
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout metadata={{title: "Next e-commerce website"}}>
       <PageIntro />
 
       <section className="featured">

@@ -16,7 +16,7 @@ const CheckoutPage = () => {
   })
 
   return (
-    <Layout>
+    <Layout metadata={{title:"Checkout page"}}>
       <section className="cart">
         <div className="container">
           <div className="cart__intro">
