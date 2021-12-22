@@ -25,10 +25,13 @@ const Product = ({ product }) => {
 	const [showBlock, setShowBlock] = useState("description");
 
 	return (
-    <Layout metadata={{
-      title: product.name,
-      image: product.images[0]
-    }}>
+		<Layout
+			metadata={{
+				title: product.name,
+				image: `${server}${product.images[0]}`,
+				url: `${server}/product/${product.id}`,
+			}}
+		>
 			<Breadcrumb currentPage={product.name} />
 
 			<section className="product-single">

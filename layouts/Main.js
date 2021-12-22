@@ -12,11 +12,13 @@ export default ({ children, metadata }) => {
 				<title>{metadata.title}</title>
 				<meta name="description" content="Some random description..."></meta>
 				<meta property="og:title" content={metadata.title} />
+				<meta property="og:url" content={metadata.url} />
 				<meta
 					property="og:description"
 					content="Some random description..."
 				></meta>
 				<meta property="og:image" content={metadata.image} />
+				<meta property="og:type" content="website" />
 			</Head>
 
 			<Header />
