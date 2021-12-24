@@ -3,11 +3,13 @@ import thunkMiddleware from "redux-thunk";
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import cartReducer from './reducers/cart';
 import userReducer from './reducers/user';
+import showCartReducer from './reducers/showCart';
 
 //COMBINING ALL REDUCERS
 const combinedReducer = combineReducers({
   cart: cartReducer,
-  user: userReducer
+  user: userReducer,
+  showCart: showCartReducer
 });
 
 // BINDING MIDDLEWARE

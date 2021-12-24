@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import "tailwindcss/tailwind.css";
 import Router from 'next/router';
 import {wrapper} from '../store';
 
