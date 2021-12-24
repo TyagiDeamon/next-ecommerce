@@ -19,7 +19,7 @@ const ShoppingCart = () => {
 	});
 
 	return (
-		<section className="cart">
+		<section className="cart overflow-auto">
 			<div className="container flex flex-col">
 				<div className="cart__intro flex flex-col gap-2">
 					<h3 className="cart__title">Shopping Cart</h3>
@@ -68,7 +68,7 @@ const ShoppingCart = () => {
 						className="cart__promo-code"
 					/>
 
-					<div className="cart-actions__items-wrapper pt-8">
+					<div className="cart-actions__items-wrapper py-8">
 						<p className="cart-actions__total">
 							Total cost <strong>${priceTotal.toFixed(2)}</strong>
 						</p>
