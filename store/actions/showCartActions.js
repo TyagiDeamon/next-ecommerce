@@ -1,9 +1,9 @@
 export const showCart = () => ({
-  type: 'SHOW_CART',
-  // value: true
-})
+	type: "SHOW_CART",
+	// value: true
+});
 
 export const hideCart = () => ({
-  type: 'HIDE_CART',
-  // value: false
-})
+	type: "HIDE_CART",
+	// value: false
+});
