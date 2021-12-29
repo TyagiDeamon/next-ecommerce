@@ -30,8 +30,8 @@ const ProductsContent = () => {
 		if (Object.keys(router.query).length == 0 || !router.query.minPrice) {
 			return true;
 		} else if (
-			item.price >= router.query.minPrice &&
-			item.price <= router.query.maxPrice
+			item.currentPrice >= router.query.minPrice &&
+			item.currentPrice <= router.query.maxPrice
 		) {
 			return true;
 		} else {
