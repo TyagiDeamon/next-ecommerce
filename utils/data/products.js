@@ -7,7 +7,7 @@ export const products = [
 		quantityAvailable: 2,
 		category: "T-shirt",
 		currentPrice: 89.99,
-		sizes: ["XL", "L"],
+		sizes: ["XS", "S"],
 		colors: ["#000000", "#6F3E18", "#838383"],
 		images: ["/images/products/product-1.jpg"],
 		punctuationReview: {
@@ -67,7 +67,7 @@ export const products = [
 		quantityAvailable: 2,
 		category: "T-shirt",
 		currentPrice: 89.99,
-		sizes: ["XL", "L"],
+		sizes: ["S", "M"],
 		colors: ["#000000", "#6F3E18", "#D4BE8D"],
 		images: ["/images/products/product-2.jpg"],
 		punctuationReview: {
@@ -187,7 +187,7 @@ export const products = [
 		quantityAvailable: 2,
 		category: "Tank Top",
 		currentPrice: 20,
-		sizes: ["XL", "L"],
+		sizes: ["XL", "XXL"],
 		colors: ["#0F73AD", "#6F3E18", "#D4BE8D"],
 		images: ["/images/products/product-4.jpg"],
 		punctuationReview: {
@@ -308,7 +308,7 @@ export const products = [
 		quantityAvailable: 2,
 		category: "T-shirt",
 		currentPrice: 64,
-		sizes: ["XL", "L"],
+		sizes: ["S", "L"],
 		colors: ["#0F73AD", "#6F3E18", "#D4BE8D"],
 		images: ["/images/products/product-6.jpg"],
 		punctuationReview: {

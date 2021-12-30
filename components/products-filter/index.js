@@ -40,6 +40,39 @@ const ProductsFilter = () => {
 		// query params changes
 	};
 
+	const checkProductType = (item) => {
+		let query = router.query;
+
+		if (!query || !query.productType) {
+			return false;
+		}
+
+		const arr = query.productType.split(",");
+		return arr.includes(item);
+	}
+
+	const checkSize = (item) => {
+		let query = router.query;
+
+		if (!query || !query.size) {
+			return false;
+		}
+
+		const arr = query.size.split(",");
+		return arr.includes(item);
+	};
+
+	const checkColor = (item) => {
+		let query = router.query;
+
+		if (!query || !query.color) {
+			return false;
+		}
+
+		const arr = query.color.split(",");
+		return arr.includes(item);
+	};
+
 	return (
 		<form className="products-filter" onChange={addQueryParams}>
 			<button
@@ -65,20 +98,31 @@ const ProductsFilter = () => {
 								key={type.id}
 								name="product-type"
 								label={type.name}
-								checked={router.query?.productType?.includes(type.name)}
+								checked={checkProductType(type.name)}
+								// checked={router.query?.productType?.includes(type.name)}
 								onChange={() => {
 									let query = router.query;
-									if (
-										query.productType &&
-										query.productType.includes(type.name)
-									) {
-										query.productType = query.productType.filter(
-											(e) => e !== type.name
-										);
-									} else if (!query.productType) {
-										query.productType = ["%", "%", type.name];
+
+									if (!query.productType) {
+										query.productType = type.name;
 									} else {
-										query.productType.push(type.name);
+										let arr = query.productType.split(",");
+
+										if (arr.includes(type.name)) {
+											arr = arr.filter((e) => e !== type.name);
+										} else {
+											arr.push(type.name);
+										}
+
+										let str = "";
+										arr.map((item) => {
+											str = str.concat(",", item);
+										});
+										if (str) {
+											str = str.substr(1);
+										}
+
+										query.productType = str;
 									}
 
 									Router.push({
@@ -122,15 +166,30 @@ const ProductsFilter = () => {
 								key={type.id}
 								name="product-size"
 								label={type.label}
-								checked={router.query?.size?.includes(type.label)}
+								checked={checkSize(type.label)}
 								onChange={() => {
 									let query = router.query;
-									if (query.size && query.size.includes(type.label)) {
-										query.size = query.size.filter((e) => e !== type.label);
-									} else if (!query.size) {
-										query.size = ["%", "%", type.label];
+
+									if (!query.size) {
+										query.size = type.label;
 									} else {
-										query.size.push(type.label);
+										let arr = query.size.split(",");
+
+										if (arr.includes(type.label)) {
+											arr = arr.filter((e) => e !== type.label);
+										} else {
+											arr.push(type.label);
+										}
+
+										let str = "";
+										arr.map((item) => {
+											str = str.concat(",", item);
+										});
+										if (str) {
+											str = str.substr(1);
+										}
+
+										query.size = str;
 									}
 
 									Router.push({
@@ -152,15 +211,30 @@ const ProductsFilter = () => {
 									key={type.id}
 									name="product-color"
 									color={type.color}
-									checked={router.query?.color?.includes(type.color)}
+									checked={checkColor(type.color)}
 									onChange={() => {
 										let query = router.query;
-										if (query.color && query.color.includes(type.color)) {
-											query.color = query.color.filter((e) => e !== type.color);
-										} else if (!query.color) {
-											query.color = ["%", "%", type.color];
+
+										if (!query.color) {
+											query.color = type.color;
 										} else {
-											query.color.push(type.color);
+											let arr = query.color.split(",");
+
+											if (arr.includes(type.color)) {
+												arr = arr.filter((e) => e !== type.color);
+											} else {
+												arr.push(type.color);
+											}
+
+											let str = "";
+											arr.map((item) => {
+												str = str.concat(",", item);
+											});
+											if (str) {
+												str = str.substr(1);
+											}
+
+											query.color = str;
 										}
 
 										Router.push({

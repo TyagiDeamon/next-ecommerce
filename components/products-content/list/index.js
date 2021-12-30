@@ -10,29 +10,18 @@ const ProductsContent = () => {
 	let { data, error } = useSwr("/api/products", fetcher);
 
 	const checkProductType = (item) => {
-		if (
-			Object.keys(router.query).length == 0 ||
-			Object(router.query.productType).length <= 2 ||
-			Object(router.query.productType).length == undefined
-		) {
+		if (!router.query || !router.query.productType) {
 			return true;
-		} else if (
-			router.query.productType &&
-			router.query.productType.includes(item.category)
-		) {
-			return true;
+		} else {
+			const arr = router.query.productType.split(",");
+			return arr.includes(item);
 		}
-
-		return false;
 	};
 
 	const checkPrice = (item) => {
-		if (Object.keys(router.query).length == 0 || !router.query.minPrice) {
+		if (!router.query || !router.query.minPrice) {
 			return true;
-		} else if (
-			item.currentPrice >= router.query.minPrice &&
-			item.currentPrice <= router.query.maxPrice
-		) {
+		} else if (item >= router.query.minPrice && item <= router.query.maxPrice) {
 			return true;
 		} else {
 			return false;
@@ -40,38 +29,27 @@ const ProductsContent = () => {
 	};
 
 	const checkSize = (item) => {
+		if (!router.query || !router.query.size) {
+			return true;
+		}
+		const arr = router.query.size.split(",");
 		let temp = false;
-		item.sizes.map((size) => {
-			if (
-				Object.keys(router.query).length == 0 ||
-				Object(router.query.size).length <= 2 ||
-				Object(router.query.size).length == undefined
-			) {
-				temp = true;
-				return true;
-			} else if (router.query.size && router.query.size.includes(size)) {
-				temp = true;
-				return true;
-			}
+		item.map((size) => {
+			temp = temp || arr.includes(size);
 		});
 
 		return temp;
 	};
 
 	const checkColor = (item) => {
+		if (!router.query || !router.query.color) {
+			return true;
+		}
+
+		const arr = router.query.color.split(",");
 		let temp = false;
-		item.colors.map((color) => {
-			if (
-				Object.keys(router.query).length == 0 ||
-				Object(router.query.color).length <= 2 ||
-				Object(router.query.color).length == undefined
-			) {
-				temp = true;
-				return true;
-			} else if (router.query.color && router.query.color.includes(color)) {
-				temp = true;
-				return true;
-			}
+		item.map((color) => {
+			temp = temp || arr.includes(color);
 		});
 
 		return temp;
@@ -86,10 +64,10 @@ const ProductsContent = () => {
 					{data
 						.filter(
 							(item) =>
-								checkProductType(item) &&
-								checkSize(item) &&
-								checkPrice(item) &&
-								checkColor(item)
+								checkProductType(item.category) &&
+								checkSize(item.sizes) &&
+								checkPrice(item.currentPrice) &&
+								checkColor(item.colors)
 						)
 						.map((item) => (
 							<ProductItem
