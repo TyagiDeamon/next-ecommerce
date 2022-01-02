@@ -8,7 +8,7 @@ const Products = () => (
 	<Layout metadata={{ title: "Next e-commerce website" }}>
 		<Breadcrumb />
 		<section className="products-page">
-			<div className="container">
+			<div className="container flex-col lg:flex-row">
 				<ProductsFilter />
 				<ProductsContent />
 			</div>
