@@ -8,7 +8,7 @@ import Tooltip from "rc-tooltip";
 import { useForm } from "react-hook-form";
 import Router from "next/router";
 
-import FilterForm from "./FilterForm";
+import ButtonForm from "./ButtonForm";
 import NormalForm from "./NormalForm";
 // data
 import productsTypes from "./../../utils/data/products-types";
@@ -45,7 +45,7 @@ const ProductsFilter = () => {
 	return (
 		<div className="flex flex-col justify-center items-center p-8">
 			<NormalForm />
-			<FilterForm />
+			<ButtonForm />
 		</div>
 	);
 };

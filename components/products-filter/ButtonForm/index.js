@@ -46,7 +46,7 @@ const handle = (props) => {
 	);
 };
 
-const FilterForm = () => {
+const ButtonForm = () => {
 	const router = useRouter();
 	const [filtersOpen, setFiltersOpen] = useState(false);
 	const [showForm, setShowForm] = useState(false);
@@ -277,4 +277,4 @@ const FilterForm = () => {
 	);
 };
 
-export default FilterForm;
+export default ButtonForm;
