@@ -1,65 +1,85 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import useOnClickOutside from 'use-onclickoutside';
-import Logo from '../../assets/icons/logo';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import useOnClickOutside from "use-onclickoutside";
+import Logo from "../../assets/icons/logo";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Slide from "@mui/material/Slide";
-import ShoppingCart from '../shopping-cart/index.js';
+import ShoppingCart from "../shopping-cart/index.js";
 import { showCart } from "./../../store/actions/showCartActions";
+import Router from "next/router";
 
 const Header = ({ isErrorPage }) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const showSlider = useSelector((state) => state.showCart);
-	const { cartItems } = useSelector(state => state.cart);
-  const arrayPaths = ['/'];  
+	const router = useRouter();
+	const dispatch = useDispatch();
+	// const showSlider = useSelector((state) => state.showCart);
+	const [showSlider, setShowSlider] = useState(false);
+	const { cartItems } = useSelector((state) => state.cart);
+	const arrayPaths = ["/"];
 
-  const [onTop, setOnTop] = useState(( !arrayPaths.includes(router.pathname) || isErrorPage ) ? false : true);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const navRef = useRef(null);
-  const searchRef = useRef(null);
+	const [onTop, setOnTop] = useState(
+		!arrayPaths.includes(router.pathname) || isErrorPage ? false : true
+	);
+	const [menuOpen, setMenuOpen] = useState(false);
+	const [searchOpen, setSearchOpen] = useState(false);
+	const navRef = useRef(null);
+	const searchRef = useRef(null);
 
-  const headerClass = () => {
-    if(window.pageYOffset === 0) {
-      setOnTop(true);
-    } else {
-      setOnTop(false);
-    }
-  }
+	const headerClass = () => {
+		if (window.pageYOffset === 0) {
+			setOnTop(true);
+		} else {
+			setOnTop(false);
+		}
+	};
 
-  useEffect(() => {
-    if(!arrayPaths.includes(router.pathname) || isErrorPage) {
-      return;
-    }
+	useEffect(() => {
+		if (!arrayPaths.includes(router.pathname) || isErrorPage) {
+			return;
+		}
 
-    headerClass();
-    window.onscroll = function() {
-      headerClass();
-    };
-  }, []);
+		headerClass();
+		window.onscroll = function () {
+			headerClass();
+		};
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  }
+		if (router.query && router.query.showCart === "true") {
+			setShowSlider(true);
+		} else {
+			setShowSlider(false);
+		}
+	}, []);
 
-  const closeSearch = () => {
-    setSearchOpen(false);
-  }
+	useEffect(() => {
+		if (router.query && router.query.showCart === "true") {
+			setShowSlider(true);
+		} else {
+			setShowSlider(false);
+		}
+	}, [router.query.showCart]);
 
-  // on click outside
-  useOnClickOutside(navRef, closeMenu);
-  useOnClickOutside(searchRef, closeSearch);
+	const closeMenu = () => {
+		setMenuOpen(false);
+	};
 
-  return (
+	const closeSearch = () => {
+		setSearchOpen(false);
+	};
+
+	// on click outside
+	useOnClickOutside(navRef, closeMenu);
+	useOnClickOutside(searchRef, closeSearch);
+
+	console.log(router.query);
+
+	return (
 		<header className={`site-header ${!onTop ? "site-header--fixed" : ""}`}>
 			<Slide direction="left" in={showSlider} mountOnEnter unmountOnExit>
 				<div className="bg-red-500/100 w-full md:w-1/2 flex flex-col h-screen fixed right-0 z-50">
 					<ShoppingCart />
 				</div>
 			</Slide>
-			<div className={`${showSlider? "hidden" : "container" }`}>
+			<div className={`${showSlider ? "hidden" : "container"}`}>
 				<Link href="/">
 					<a>
 						<h1 className="site-logo">
@@ -106,7 +126,13 @@ const Header = ({ isErrorPage }) => {
 						></i>
 					</button>
 					{/* <Link href="/cart"> */}
-					<button className="btn-cart" onClick={() => dispatch(showCart())}>
+					{/* onClick={() => dispatch(showCart())} */}
+					<button
+						className="btn-cart"
+						onClick={() => {
+							Router.push({ query: {...router.query, showCart : "true"} });
+						}}
+					>
 						<i className="icon-cart"></i>
 						{cartItems.length > 0 && (
 							<span className="btn-cart__count">{cartItems.length}</span>
@@ -131,6 +157,5 @@ const Header = ({ isErrorPage }) => {
 		</header>
 	);
 };
-
 
 export default Header;

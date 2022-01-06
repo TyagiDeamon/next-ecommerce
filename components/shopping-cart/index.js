@@ -2,8 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import CheckoutStatus from "../../components/checkout-status";
 import Item from "./item";
 import { hideCart } from "../../store/actions/showCartActions";
-
+import Router from "next/router"
+import { useRouter } from "next/router";
 const ShoppingCart = () => {
+	const router = useRouter();
   const dispatch = useDispatch();
 
 	const { cartItems } = useSelector((state) => state.cart);
@@ -57,9 +59,16 @@ const ShoppingCart = () => {
 
 					{cartItems.length === 0 && <p>Nothing in the cart</p>}
 				</div>
-
+				{/* onClick={() => dispatch(hideCart())} */}
 				<div className="cart-actions">
-					<span className="cart__btn-back cursor-pointer" onClick={()=>dispatch(hideCart())}>
+					<span
+						className="cart__btn-back cursor-pointer"
+						onClick={() => {
+							Router.push(
+								{ query: {...router.query, showCart : "false"} }
+							);
+						}}
+					>
 						<i className="icon-left"></i> Continue Shopping
 					</span>
 					<input
